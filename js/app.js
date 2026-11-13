@@ -2,6 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyCtAzc2hrno9X3m4Ew6SMSJt6EsnRR0UVs",
   authDomain: "announcement-board-c7cba.firebaseapp.com",
+  databaseURL: "https://announcement-board-c7cba-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "announcement-board-c7cba",
   storageBucket: "announcement-board-c7cba.firebasestorage.app",
   messagingSenderId: "974432777593",
