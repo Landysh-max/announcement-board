@@ -344,22 +344,24 @@ function createEventCard(event) {
         const isRegistered = event.registeredStudents && event.registeredStudents.includes(currentUser.name);
         const isFull = event.registeredStudents && event.registeredStudents.length >= event.people;
         
+                const registeredCount = event.registeredStudents ? event.registeredStudents.length : 0;
+        
         if (isRegistered) {
-            buttonHtml = `<button class="register-btn registered" disabled>✓ Вы зарегистрированы</button>`;
+            buttonHtml = `<button class="register-btn registered" disabled>✓ Вы зарегистрированы (${registeredCount}/${event.people})</button>`;
         } else if (isFull) {
-            buttonHtml = `<button class="register-btn" disabled>Мест нет</button>`;
+            buttonHtml = `<button class="register-btn" disabled>Мест нет (${event.people}/${event.people})</button>`;
         } else {
-            buttonHtml = `<button class="register-btn" data-event-id="${event.id}">Зарегистрироваться</button>`;
+            buttonHtml = `<button class="register-btn" data-event-id="${event.id}">Зарегистрироваться (${registeredCount}/${event.people})</button>`;
         }
     }
     
-    // Список зарегистрированных
+        // Список зарегистрированных - показываем только преподавателю
     let registeredListHtml = '';
-    if (event.registeredStudents && event.registeredStudents.length > 0) {
+    if (currentUser && currentUser.role === 'teacher' && event.registeredStudents && event.registeredStudents.length > 0) {
         const studentsList = event.registeredStudents.join(', ');
         registeredListHtml = `
             <div class="registered-list">
-                <strong>Зарегистрированы (${event.registeredStudents.length}/${event.people}):</strong>
+                <strong>📋 Зарегистрированные ученики (${event.registeredStudents.length}/${event.people}):</strong>
                 ${studentsList}
             </div>
         `;
