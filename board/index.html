@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доска объявлений</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📋 Доска объявлений</h1>
+            <nav class="nav">
+                <button id="loginBtn" class="btn btn-primary">Войти</button>
+                <div id="userInfo" class="user-info hidden">
+                    <span id="userName"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Выйти</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Модальное окно входа -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Выберите тип профиля</h2>
+            <div class="role-selection">
+                <button id="studentBtn" class="btn-role">
+                    <div class="role-icon">🎓</div>
+                    <div class="role-name">Ученик</div>
+                </button>
+                <button id="teacherBtn" class="btn-role">
+                    <div class="role-icon">👨‍🏫</div>
+                    <div class="role-name">Преподаватель</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-edit">&times;</span>
+            <h2>Редактировать мероприятие</h2>
+            <form id="editForm">
+                <input type="hidden" id="editEventId">
+                <div class="form-group">
+                    <label for="editTitle">Заголовок:</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPeople">Количество человек:</label>
+                    <input type="number" id="editPeople" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="editDate">Дата:</label>
+                    <input type="date" id="editDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editLocation">Место проведения:</label>
+                    <input type="text" id="editLocation" required placeholder="Где будет мероприятие">
+                </div>
+                <div class="form-group">
+                    <label for="editComment">Комментарий:</label>
+                    <textarea id="editComment" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Панель преподавателя -->
+    <div id="teacherPanel" class="teacher-panel hidden">
+        <div class="container">
+            <h2>Создать новое мероприятие</h2>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Заголовок (Название):</label>
+                    <input type="text" id="eventTitle" required placeholder="Введите название мероприятия">
+                </div>
+                <div class="form-group">
+                    <label for="eventPeople">Количество человек:</label>
+                    <input type="number" id="eventPeople" required min="1" placeholder="Сколько человек требуется">
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Дата:</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Место проведения:</label>
+                    <input type="text" id="eventLocation" required placeholder="Например: Аудитория 301, Главный корпус">
+                </div>
+                <div class="form-group">
+                    <label for="eventComment">Комментарий:</label>
+                    <textarea id="eventComment" rows="4" placeholder="Опишите мероприятие..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Создать объявление</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Список объявлений -->
+    <main class="main">
+        <div class="container">
+            <h2 class="section-title">Все мероприятия</h2>
+            <div id="eventsList" class="events-grid">
+                <!-- Объявления будут добавляться сюда динамически -->
+            </div>
+            <div id="noEvents" class="no-events hidden">
+                <p>Пока нет объявлений</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Уведомление -->
+    <div id="notification" class="notification hidden"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
