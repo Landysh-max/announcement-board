@@ -288,7 +288,9 @@ function renderEvents() {
     }
     
     noEvents.classList.add('hidden');
-    
+
+  // Обновляем счётчик
+document.getElementById('totalEvents').textContent = events.length;
     let html = '';
     for (let i = 0; i < events.length; i++) {
         html += createEventCard(events[i]);
