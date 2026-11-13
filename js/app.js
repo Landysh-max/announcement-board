@@ -141,17 +141,23 @@ function updateUI() {
     const loginBtn = document.getElementById('loginBtn');
     const userInfo = document.getElementById('userInfo');
     const userName = document.getElementById('userName');
+    const userRole = document.getElementById('userRole');
+    const userAvatarIcon = document.getElementById('userAvatarIcon');
     const teacherPanel = document.getElementById('teacherPanel');
     
     if (currentUser) {
         loginBtn.classList.add('hidden');
         userInfo.classList.remove('hidden');
-        userName.textContent = `${currentUser.name} (${currentUser.role === 'student' ? 'Ученик' : 'Преподаватель'})`;
+        userName.textContent = currentUser.name;
         
-        if (currentUser.role === 'teacher') {
-            teacherPanel.classList.remove('hidden');
-        } else {
+        if (currentUser.role === 'student') {
+            userRole.textContent = 'Ученик';
+            userAvatarIcon.textContent = '🎓';
             teacherPanel.classList.add('hidden');
+        } else {
+            userRole.textContent = 'Преподаватель';
+            userAvatarIcon.textContent = '👨‍🏫';
+            teacherPanel.classList.remove('hidden');
         }
     } else {
         loginBtn.classList.remove('hidden');
