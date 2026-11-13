@@ -3,21 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Доска объявлений</title>
+    <title>Доска объявлений — НИТУ МИСиС</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Шапка сайта -->
     <header class="header">
-        <div class="container">
-            <h1 class="logo">📋 Доска объявлений</h1>
-            <nav class="nav">
-                <button id="loginBtn" class="btn btn-primary">Войти</button>
-                <div id="userInfo" class="user-info hidden">
-                    <span id="userName"></span>
-                    <button id="logoutBtn" class="btn btn-secondary">Выйти</button>
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="university-info">
+                    <div class="logo-container">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3"/>
+                                <path d="M30 65 L50 25 L70 65 Z" fill="none" stroke="white" stroke-width="3"/>
+                                <line x1="35" y1="55" x2="65" y2="55" stroke="white" stroke-width="3"/>
+                                <circle cx="50" cy="45" r="5" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="university-name">
+                            <div class="university-short">НИТУ МИСиС</div>
+                            <div class="university-full">Национальный исследовательский технологический университет</div>
+                        </div>
+                    </div>
                 </div>
-            </nav>
+                <nav class="nav">
+                    <button id="loginBtn" class="btn btn-primary">
+                        <span class="btn-icon">👤</span>
+                        <span>Войти</span>
+                    </button>
+                    <div id="userInfo" class="user-info hidden">
+                        <div class="user-avatar">
+                            <span id="userAvatarIcon">🎓</span>
+                        </div>
+                        <div class="user-details">
+                            <span id="userName" class="user-name"></span>
+                            <span id="userRole" class="user-role"></span>
+                        </div>
+                        <button id="logoutBtn" class="btn btn-secondary">Выйти</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <h1 class="page-title">📋 Доска объявлений</h1>
+                <p class="page-subtitle">Информационная система мероприятий университета</p>
+            </div>
         </div>
     </header>
 
@@ -26,14 +59,17 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Выберите тип профиля</h2>
+            <p class="modal-subtitle">Для доступа к системе необходимо авторизоваться</p>
             <div class="role-selection">
                 <button id="studentBtn" class="btn-role">
                     <div class="role-icon">🎓</div>
                     <div class="role-name">Ученик</div>
+                    <div class="role-desc">Просмотр и регистрация на мероприятия</div>
                 </button>
                 <button id="teacherBtn" class="btn-role">
                     <div class="role-icon">👨‍🏫</div>
                     <div class="role-name">Преподаватель</div>
+                    <div class="role-desc">Создание и управление мероприятиями</div>
                 </button>
             </div>
         </div>
@@ -43,7 +79,7 @@
     <div id="editModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-edit">&times;</span>
-            <h2>Редактировать мероприятие</h2>
+            <h2>✏️ Редактировать мероприятие</h2>
             <form id="editForm">
                 <input type="hidden" id="editEventId">
                 <div class="form-group">
@@ -60,13 +96,13 @@
                 </div>
                 <div class="form-group">
                     <label for="editLocation">Место проведения:</label>
-                    <input type="text" id="editLocation" required placeholder="Где будет мероприятие">
+                    <input type="text" id="editLocation" required placeholder="Например: Аудитория 301, Главный корпус">
                 </div>
                 <div class="form-group">
                     <label for="editComment">Комментарий:</label>
                     <textarea id="editComment" rows="4"></textarea>
                 </div>
-                <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                <button type="submit" class="btn btn-success">💾 Сохранить изменения</button>
             </form>
         </div>
     </div>
@@ -74,29 +110,40 @@
     <!-- Панель преподавателя -->
     <div id="teacherPanel" class="teacher-panel hidden">
         <div class="container">
-            <h2>Создать новое мероприятие</h2>
+            <div class="panel-header">
+                <h2>➕ Создать новое мероприятие</h2>
+                <p>Заполните все обязательные поля для публикации объявления</p>
+            </div>
             <form id="eventForm">
-                <div class="form-group">
-                    <label for="eventTitle">Заголовок (Название):</label>
-                    <input type="text" id="eventTitle" required placeholder="Введите название мероприятия">
+                <div class="form-row">
+                    <div class="form-group form-group-large">
+                        <label for="eventTitle">📝 Заголовок (Название):</label>
+                        <input type="text" id="eventTitle" required placeholder="Введите название мероприятия">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventPeople">Количество человек:</label>
-                    <input type="number" id="eventPeople" required min="1" placeholder="Сколько человек требуется">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventPeople">👥 Количество человек:</label>
+                        <input type="number" id="eventPeople" required min="1" placeholder="Сколько человек требуется">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">📅 Дата:</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventDate">Дата:</label>
-                    <input type="date" id="eventDate" required>
+                <div class="form-row">
+                    <div class="form-group form-group-large">
+                        <label for="eventLocation">📍 Место проведения:</label>
+                        <input type="text" id="eventLocation" required placeholder="Например: Аудитория 301, Главный корпус">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventLocation">Место проведения:</label>
-                    <input type="text" id="eventLocation" required placeholder="Например: Аудитория 301, Главный корпус">
+                <div class="form-row">
+                    <div class="form-group form-group-large">
+                        <label for="eventComment">💬 Комментарий:</label>
+                        <textarea id="eventComment" rows="4" placeholder="Опишите мероприятие..."></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventComment">Комментарий:</label>
-                    <textarea id="eventComment" rows="4" placeholder="Опишите мероприятие..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-success">Создать объявление</button>
+                <button type="submit" class="btn btn-success btn-large">🚀 Создать объявление</button>
             </form>
         </div>
     </div>
@@ -104,15 +151,60 @@
     <!-- Список объявлений -->
     <main class="main">
         <div class="container">
-            <h2 class="section-title">Все мероприятия</h2>
+            <div class="section-header">
+                <h2 class="section-title">📢 Все мероприятия</h2>
+                <div class="section-stats" id="eventsStats">
+                    <span class="stat-item">Всего: <strong id="totalEvents">0</strong></span>
+                </div>
+            </div>
             <div id="eventsList" class="events-grid">
                 <!-- Объявления будут добавляться сюда динамически -->
             </div>
             <div id="noEvents" class="no-events hidden">
-                <p>Пока нет объявлений</p>
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h3>Пока нет объявлений</h3>
+                    <p>Преподаватели ещё не создали ни одного мероприятия</p>
+                </div>
             </div>
         </div>
     </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="3"/>
+                            <path d="M30 65 L50 25 L70 65 Z" fill="none" stroke="white" stroke-width="3"/>
+                            <line x1="35" y1="55" x2="65" y2="55" stroke="white" stroke-width="3"/>
+                            <circle cx="50" cy="45" r="5" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="footer-text">
+                        <div class="footer-university">НИТУ МИСиС</div>
+                        <div class="footer-address">119049, г. Москва, Ленинский проспект, д. 4</div>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <div class="footer-section">
+                        <h4>Контакты</h4>
+                        <p>📞 +7 (495) 638-44-50</p>
+                        <p>✉️ info@misis.ru</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Сайт</h4>
+                        <p>🌐 misis.ru</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 НИТУ МИСиС. Доска объявлений. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Уведомление -->
     <div id="notification" class="notification hidden"></div>
